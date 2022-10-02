@@ -1,0 +1,179 @@
+{
+
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "ITCS 6177",
+      "description": "Swagger learning",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "137.184.211.211:3001",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Companies",
+        "description": "API for companies in the db"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/companies": {
+        "get": {
+          "tags": ["Companies"],
+          "summary": "Get all companies in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Companies"
+              }
+            }
+          }
+        },
+        "post": {
+            "tags": ["Companies"],
+            "summary":"Create a company",
+            "description": "Create new company in db",
+            "parameters": [
+              {
+                "name": "company",
+                "in": "body",
+                "description": "Company that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/Company"
+                }
+              }
+            ],
+            "produces": ["application/json"],
+            "responses": {
+              "200": {
+                "description": "New company is created",
+                "schema": {
+                  "$ref": "#/definitions/Company"
+                }
+              }
+            }
+          },
+    "put": {
+            "summary": "Update Company",
+            "tags": ["Companies"],
+            "parameters": [
+              {
+                "name": "company",
+                "in": "body",
+                "description": "Company with new values of properties",
+                "schema": {
+                  "$ref": "#/definitions/updateCompany"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "company is updated",
+                "schema": {
+                  "$ref": "#/definitions/Company"
+                }
+              }
+            }
+          },
+          "patch": {
+            "summary": "patch Company",
+            "tags": ["Companies"],
+            "parameters": [
+              {
+                "name": "company",
+                "in": "body",
+                "description": "update company city using patch",
+                "schema": {
+                  "$ref": "#/definitions/patchCompany"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "company is patched",
+                "schema": {
+                  "$ref": "#/definitions/Company"
+                }
+              }
+            }
+          }
+        },
+    "/companies/{id}":{
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "id of company that we want to find",
+              "type": "string"
+            }
+          ],
+          "delete": {
+            "summary": "Delete company with given ID",
+            "tags": [
+              "Companies"
+            ],
+            "responses": {
+              "200": {
+                "description": "Company is deleted",
+                "schema": {
+                  "$ref": "#/definitions/Company"
+                }
+              }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "Company": {
+          "properties": {
+            "COMPANY_ID": {
+              "type": "string"
+            },
+            "COMPANY_NAME": {
+              "type": "string"
+            },
+            "COMPANY_CITY": {
+              "type": "string"
+            }
+          }
+        },
+    "updateCompany": {
+          "properties": {
+            "COMPANY_ID": {
+              "type": "string"
+            },
+            "COMPANY_NAME":{
+              "type":"string"
+            },
+            "COMPANY_CITY":{
+              "type":"string"
+            }
+    
+          }
+        },
+        "patchCompany": {
+          "properties": {
+            "COMPANY_ID": {
+              "type": "string"
+            },
+            "COMPANY_CITY":{
+              "type":"string"
+            }
+    
+          }
+        },
+        "Companies": {
+          "type": "array",
+          "$ref": "#/definitions/Company"
+        }
+      }
+    }
+    
+              
