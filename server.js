@@ -1,4 +1,5 @@
 const express=require('express');
+const axios=require('axios');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -60,8 +61,21 @@ try {
     }
   });
 
+  // Assignment 9 code
 
+  app.get('/say',(req,res)=>{
 
+    const greeting=req.query.keyword;
+ 
+    const query='https://0xeqmp63nj.execute-api.us-east-1.amazonaws.com/test/getgreeting?keyword='+greeting;
+    axios.get(query)
+    .then(data => res.send(data.data))
+    .catch(err => console.log(err));
+ 
+   // res.send("Saumitra says "+greeting);
+ 
+ });
+ 
 
 
 app.get('/companies',async (req,res)=>{
